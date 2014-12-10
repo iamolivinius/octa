@@ -1,6 +1,6 @@
 {
     "name": "__MSG_appName__",
-    "version": "0.0.3",
+    "version": "0.0.6",
     "manifest_version": 2,
     "description": "__MSG_appDescription__",
     "icons": {
@@ -22,18 +22,23 @@
         },
         "default_title": "pattern creator"
     },
-    "content_scripts": [{
-        "matches": [
-            "http://*/*",
-            "https://*/*"
-        ],
-        "css": [],
-        "js": [
-            "scripts/contentscript.js"
-        ],
-        "run_at": "document_end",
-        "all_frames": false
-    }],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "css": [
+                "styles/main.css"
+            ],
+            "js": [
+                "bower_components/jquery/dist/jquery.js",
+                "scripts/contentscript.js"
+            ],
+            "run_at": "document_end",
+            "all_frames": false
+        }
+    ],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "permissions": [
         "tabs",

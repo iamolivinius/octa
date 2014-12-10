@@ -2,47 +2,59 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  init: function() {
-    // chrome.runtime.onMessage.addListener(function() {
-    //   console.log('processing message in ember');
-    //   this.send('onMessageReceived', {ASDF: "ASDF"});
-    // }.bind(this));
-    this.send('onSelectionReceived', {container: '<div></div>', enclosing: '<span></span>', action: 'add'});
-  },
+  needs: ['step2'],
+  containers: Ember.computed.alias('controllers.step2.containers'),
 
-  containers: [],
+  init: function() {
+    this.send('onTriggerReceived', {cid: 0, trigger: '<div></div>', action: 'add'});
+    this.send('onFieldReceived', {cid: 0, field: '<div>1</div>', action: 'add'});
+    this.send('onFieldReceived', {cid: 0, field: '<div>2</div>', action: 'add'});
+  },
 
   actions: {
     onSelectContainer: function() {
       console.log('qwerqwer');
       // $('#modal-select').modal('show');
-      // chrome.windows.getAll(null, function(windows) {
-      //   windows.forEach(function(window) {
-      //     chrome.tabs.getAllInWindow(window.id, function(tabs) {
-      //       tabs.forEach(function(tab) {
-      //         chrome.tabs.sendMessage(tab.id, {
-      //           action: 'selection',
-      //           activate: true,
-      //           mode: 'container'
-      //         }, function() {
-
-      //         });
-      //       });
-      //     });
-      //   });
-      // });
+      chrome.windows.getAll(null, function(windows) {
+        windows.forEach(function(window) {
+          chrome.tabs.getAllInWindow(window.id, function(tabs) {
+            tabs.forEach(function(tab) {
+              chrome.tabs.sendMessage(tab.id, {
+                action: 'selection',
+                activate: true,
+                mode: 'container'
+              }, function() {});
+            });
+          });
+        });
+      });
     },
-    onMessageReceived: function (data) {
-      console.log(JSON.stringify(data));
-    },
-    onSelectionReceived: function(request) {
+    onTriggerReceived: function(request) {
       if (request.action === 'add') {
-        var container = {
-          cid :       this.containers.length,
-          pattern :   request.container,
-          enclosing : request.enclosing
-        };
-        this.containers.push(container);
+        var trigger = request.trigger;
+
+        if (trigger === undefined) {
+          return;
+        }
+
+        var cs = this.get('containers');
+        cs[request.cid].trigger = trigger;
+        this.set('containers', cs);
+      }
+    },
+    onFieldReceived: function(request) {
+      if (request.action === 'add') {
+
+        var cs = this.get('containers');
+
+        if (cs[request.cid].fields === undefined) {
+          cs[request.cid].fields = [];
+        }
+
+        cs[request.cid].fields.push({
+          field: request.field
+        });
+        this.set('containers', cs);
       }
     }
   }

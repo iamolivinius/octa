@@ -19,9 +19,9 @@
   <tbody>
     {{#each containers}}
     <tr>
-      <td class="tbl-container-name">KEY</td>
-      <td style="font-family: monospace;">{{this.enclosing}}</td>
-      <td style="font-family: monospace;">{{this.pattern}}</td>
+      <td class="tbl-container-name">{{input type="text" value=this.name}}</td>
+      <td>{{this.enclosing}}</td>
+      <td>{{this.pattern}}</td>
     </tr>
     {{/each}}
   </tbody>

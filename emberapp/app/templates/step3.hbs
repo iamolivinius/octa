@@ -13,7 +13,7 @@
   <div class="row">
     <div class="column">
       <h3 class="ui header">
-        Container: <strong>KEY</strong>
+        Container: <strong>{{this.name}}</strong>
       </h3>
       <br>
     </div>
@@ -24,7 +24,7 @@
       <div class="ui red ribbon label">Trigger</div>
       <p>
         <label id="ctn-KEY-trigger">
-          {{#if trigger}}
+          {{#if this.trigger}}
             {{this.trigger}}
           {{else}}
             Not set
@@ -49,7 +49,9 @@
         </thead>
         <tbody>
         {{#each this.fields}}
-          <tr><td class="field-name" data-container="KEY">{{fieldname}}</td><td>{{field}}</td></tr>
+          <tr>
+            <td class="field-name" data-container="KEY">{{input type="text" value=this.name}}</td>
+            <td>{{field}}</td></tr>
         {{/each}}
         </tbody>
         <tfoot>
