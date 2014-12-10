@@ -1,0 +1,31 @@
+<div class="ui header">
+  Postprocessing
+  <div class="sub header">
+    Set each container's processing function.
+  </div>
+</div>
+
+{{#each containers}}
+<div class="ui segment">
+  <div class="row">
+    <div class="column">
+      <h3 class="ui header">Container: <strong>{{@key}}</strong></h3>
+      <br>
+    </div>
+  </div>
+  
+  <div class="ui form">
+    <div class="field">
+      <label>Process function</label>
+      <textarea data-container="{{@key}}">{{this.process}}</textarea>
+    </div>
+  </div>
+</div>
+{{else}}
+<div class="ui warning message">
+  <div class="header">
+    No Containers Available
+  </div>
+  <p>Please add some containers before creating processing functions.</p>
+</div>
+{{/each}}

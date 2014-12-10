@@ -1,0 +1,39 @@
+<h2 class="ui dividing header">
+  <i class="info circle icon"></i>
+  <div class="content">
+    General Information
+    <div class="sub header">
+      Configure the observer's general information.
+    </div>
+  </div>
+</h2>
+
+<div class="ui form">
+  <div class="field">
+    <label>Name</label>
+    <div class="left labeled input">
+      {{input type="text" value=observerName}}
+    </div>
+  </div>
+  <div class="field">
+    <label>Version</label>
+    <div class="left labeled input">
+      {{input type="number" min=0 value=observerVersion}}
+    </div>
+  </div>
+  <div class="field">
+    <label>Author</label>
+    <div class="left labeled input">
+      {{input type="text" value=observerAuthor}}
+    </div>
+  </div>
+  <div class="field">
+    <label>Network</label>
+    {{view "select" content=networks class="" value=selectedNetwork}}
+  </div>
+
+  <div class="ui right labeled icon submit primary button" {{action "onNext"}}>
+    <i class="right arrow icon"></i>
+    Next
+  </div>
+</div>

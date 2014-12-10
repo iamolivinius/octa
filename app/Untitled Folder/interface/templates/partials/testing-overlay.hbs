@@ -1,0 +1,18 @@
+<div class="testing-overlay">
+  <table>
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Content</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each data}}
+      <tr>
+        <td>{{@key}}</td>
+        <td>{{this}}</td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</div>

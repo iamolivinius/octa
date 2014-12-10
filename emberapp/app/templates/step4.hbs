@@ -1,0 +1,44 @@
+<h2 class="ui dividing header">
+  <i class="info circle icon"></i>
+  <div class="content">
+    Postprocessing
+    <div class="sub header">
+      Set each container's processing function.
+    </div>
+  </div>
+</h2>
+
+{{#each containers}}
+<div class="ui segment">
+  <div class="row">
+    <div class="column">
+      <h3 class="ui header">Container: <strong>KEY</strong></h3>
+      <br>
+    </div>
+  </div>
+
+  <div class="ui form">
+    <div class="field">
+      <label>Process function</label>
+      <textarea data-container="KEY">{{this.process}}</textarea>
+    </div>
+  </div>
+</div>
+{{else}}
+<div class="ui warning message">
+  <div class="header">
+    No Containers Available
+  </div>
+  <p>Please add some containers before creating processing functions.</p>
+</div>
+{{/each}}
+
+<div class="ui left labeled icon button" {{action "onBack"}}>
+  <i class="left arrow icon"></i>
+  Back
+</div>
+
+<div class="ui right labeled icon submit primary button" {{action "onNext"}}>
+  <i class="right arrow icon"></i>
+  Next
+</div>

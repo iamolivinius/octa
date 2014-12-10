@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Observer Creation Tool</title>
+  <!-- FONTS -->
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../../bower_components/semantic-ui/build/packaged/css/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="css/selector.css">
+  <link rel="stylesheet" type="text/css" href="css/creator.css">
+</head>
+<body>
+  <main class="ui">
+    <div class="ui five steps" id="main-steps">
+      <div class="ui active step" data-segment="general">
+        1. General Information
+      </div>
+      <div class="ui step" data-segment="containers">
+        2. Containers
+      </div>
+      <div class="ui step" data-segment="fields">
+        3. Extractable Fields
+      </div>
+      <div class="ui step" data-segment="process">
+        4. Postprocessing
+      </div>
+      <div class="ui step" data-segment="finalize">
+        5. Finalize
+      </div>
+    </div>
+
+    <div class="ui process segment" id="general">
+    </div>
+
+    <div class="ui process segment" id="containers">
+    </div>
+
+    <div class="ui process segment" id="fields">
+    </div>
+
+    <div class="ui process segment" id="process">
+    </div>
+
+    <div class="ui process segment" id="finalize">
+    </div>
+    
+    <div class="ui small modal" id="modal-select">
+      <div class="header">
+        Selection
+      </div>
+      <div class="content">
+        Please select an element on another page.
+      </div>
+    </div>
+
+    <div class="ui modal" id="modal-set-container-name">
+      <i class="close icon"></i>
+      <div class="header">
+        Container Name
+      </div>
+      <div class="content">
+        <div class="ui form">
+          <div class="field">
+            <label>Set an appropriate name for the container</label>
+            <div class="left labeled input">
+              <input type="text" name="container-name" id="modal-container-name" placeholder="Container Name">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui green button" id="btn-container-name-modal-okay">
+          Add
+        </div>
+      </div>
+    </div>
+
+    <div class="ui modal" id="modal-set-field-name">
+      <i class="close icon"></i>
+      <div class="header">
+        Field Name
+      </div>
+      <div class="content">
+        <div class="ui form">
+          <div class="field">
+            <label>Set an appropriate name for the field</label>
+            <div class="left labeled input">
+              <input type="text" name="field-name" id="modal-field-name" placeholder="Field Name">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui green button" id="btn-field-name-modal-okay">
+          Add
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- COMPONENTS -->
+  <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="../../bower_components/handlebars/handlebars.min.js"></script>
+  <script src="../../bower_components/semantic-ui/build/packaged/javascript/semantic.js"></script>
+  <!-- INTERFACE -->
+  <script src="../scripts/utils.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/observer.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/inputs.js"></script>
+  <script src="js/communication.js"></script>
+  <script src="js/mechanics.js"></script>
+</body>
+</html>

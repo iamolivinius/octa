@@ -1,0 +1,78 @@
+<div class="ui header">
+  Extractable Fields
+  <div class="sub header">
+    Set each container's extractable fields.
+  </div>
+</div>
+
+{{#each containers}}
+<div class="ui segment">
+  <div class="row">
+    <div class="column">
+      <h3 class="ui header">
+        Container: <strong>{{@key}}</strong>
+      </h3>
+      <br>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="column">
+      <div class="ui red ribbon label">Trigger</div>
+      <p>
+        <label id="ctn-{{@key}}-trigger">
+          {{#if trigger}}
+            {{this.trigger}}
+          {{else}}
+            Not set
+          {{/if}}
+        </label>
+        <div class="ui tiny button btn-trigger-select" data-container="{{@key}}">
+          Select Trigger
+        </div>
+      </p>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="column">
+      <div class="ui teal ribbon label">Fields</div>
+      <table class="ui table segment fields-table ctn-{{@key}}">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Pattern</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each this.fields}}
+          <tr><td class="field-name" data-container="{{@key}}">{{fieldname}}</td><td>{{field}}</td></tr>
+        {{/each}}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="2">
+              <div class="ui blue labeled icon button btn-add-field" data-container="{{@key}}">
+                <i class="add icon"></i> Add
+              </div>
+              <div class="ui red disabled labeled icon button btn-remove-field" data-container="{{@key}}">
+                <i class="remove icon"></i> Remove
+              </div>
+              <div class="ui labeled icon button btn-test-container" data-container="{{@key}}">
+                <i class="unhide icon"></i> Test Container
+              </div>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+{{else}}
+<div class="ui warning message">
+  <div class="header">
+    No Containers Available
+  </div>
+  <p>Please add some containers before creating fields.</p>
+</div>
+{{/each}}

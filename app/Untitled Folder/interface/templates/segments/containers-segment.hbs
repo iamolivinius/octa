@@ -1,0 +1,33 @@
+<div class="ui header">
+  Containers
+  <div class="sub header">
+    Select the observer's containers.
+  </div>
+</div>
+
+<table class="ui table segment" id="container-table">
+  <thead>
+    <tr>
+      <th width="20%">Name</th>
+      <th width="20%">Enclosing Identifier</th>
+      <th>Container</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each containers}}
+    <tr>
+      <td class="tbl-container-name">{{@key}}</td>
+      <td style="font-family: monospace;">{{this.enclosing}}</td>
+      <td style="font-family: monospace;">{{this.pattern}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="3">
+        <div class="ui blue labeled icon button" id="btn-select-container"><i class="add icon"></i> Select Container</div>
+        <div class="ui red labeled disabled icon button" id="btn-remove-container"><i class="remove icon"></i> Remove</div>
+      </th>
+    </tr>
+  </tfoot>
+</table>
