@@ -8,13 +8,15 @@ export default Ember.Controller.extend({
     //   this.send('onMessageReceived', {ASDF: "ASDF"});
     // }.bind(this));
     this.send('onSelectionReceived', {container: '<div></div>', enclosing: '<span></span>', action: 'add'});
+    this.send('onSelectionReceived', {container: '<div><div><div></div></div></div>', enclosing: '<p></p>', action: 'add'});
   },
 
   containers: [],
 
   actions: {
     onSelectContainer: function() {
-      console.log('qwerqwer');
+      console.log('qwerqwedr');
+      // Run the Contentscript // switch to latest tab?
       // $('#modal-select').modal('show');
       // chrome.windows.getAll(null, function(windows) {
       //   windows.forEach(function(window) {

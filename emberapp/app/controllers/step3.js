@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  needs: ['step2'],
+  needs: 'step2',
   containers: Ember.computed.alias('controllers.step2.containers'),
 
   init: function() {
@@ -11,24 +11,7 @@ export default Ember.Controller.extend({
     this.send('onFieldReceived', {cid: 0, field: '<div>2</div>', action: 'add'});
   },
 
-  actions: {
-    onSelectContainer: function() {
-      console.log('qwerqwer');
-      // $('#modal-select').modal('show');
-      chrome.windows.getAll(null, function(windows) {
-        windows.forEach(function(window) {
-          chrome.tabs.getAllInWindow(window.id, function(tabs) {
-            tabs.forEach(function(tab) {
-              chrome.tabs.sendMessage(tab.id, {
-                action: 'selection',
-                activate: true,
-                mode: 'container'
-              }, function() {});
-            });
-          });
-        });
-      });
-    },
+  actions: {    
     onTriggerReceived: function(request) {
       if (request.action === 'add') {
         var trigger = request.trigger;
