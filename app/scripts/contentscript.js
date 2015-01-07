@@ -115,6 +115,8 @@ var select = function select(event) {
 };
 
 var process = function process(event) {
+  console.log('Processing started: ');
+  console.log(event);
   // stop event propagation and default events
   event.stopImmediatePropagation();
   event.preventDefault();
@@ -150,23 +152,23 @@ var process = function process(event) {
       enclosing += ' ' + $target.prop('tagName').toLowerCase();
 
       // send request to creator page
-      chrome.extension.sendRequest({
+      chrome.runtime.sendMessage({
         action: 'add',
         type: 'container',
         container: xml,
         enclosing: enclosing
-      }, function() {});
+      });
       break;
     case 'field':
       // convert target node to selector path
       var path = convertNodeToPath($target);
 
       // send request to creator page
-      chrome.extension.sendRequest({
+      chrome.runtime.sendMessage({
         action: 'add',
         type: 'field',
         field: path
-      }, function() {});
+      });
       break;
     case 'trigger':
       // get class of target node
@@ -190,11 +192,11 @@ var process = function process(event) {
       }
 
       // send request to creator page
-      chrome.extension.sendRequest({
+      chrome.runtime.sendMessage({
         action: 'add',
         type: 'trigger',
         trigger: _trigger
-      }, function() {});
+      });
       break;
   }
 };
@@ -204,15 +206,6 @@ chrome.runtime.onMessage.addListener(function(request) {
 
   switch (request.action) {
     case 'selection':
-
-      setTimeout(function() {
-        console.log('sending message');
-        chrome.runtime.sendMessage({
-          action: 'add',
-          type: 'trigger',
-          trigger: "asdf"
-        });
-      }, 5000);
 
       if (request.activate === true) {
         // inject selector frame

@@ -3,10 +3,11 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   init: function() {
-    // chrome.runtime.onMessage.addListener(function() {
-    //   console.log('processing message in ember');
-    //   this.send('onMessageReceived', {ASDF: "ASDF"});
-    // }.bind(this));
+    chrome.runtime.onMessage.addListener(function(request) {
+      console.log('processing message in ember');
+      console.log(request);
+      this.send('onSelectionReceived', request);
+    }.bind(this));
     this.send('onSelectionReceived', {container: '<div></div>', enclosing: '<span></span>', action: 'add'});
     this.send('onSelectionReceived', {container: '<div><div><div></div></div></div>', enclosing: '<p></p>', action: 'add'});
   },
@@ -15,24 +16,23 @@ export default Ember.Controller.extend({
 
   actions: {
     onSelectContainer: function() {
-      console.log('qwerqwedr');
-      // Run the Contentscript // switch to latest tab?
-      // $('#modal-select').modal('show');
-      // chrome.windows.getAll(null, function(windows) {
-      //   windows.forEach(function(window) {
-      //     chrome.tabs.getAllInWindow(window.id, function(tabs) {
-      //       tabs.forEach(function(tab) {
-      //         chrome.tabs.sendMessage(tab.id, {
-      //           action: 'selection',
-      //           activate: true,
-      //           mode: 'container'
-      //         }, function() {
+      console.log('Select Container Action starts!');
+      //Run the Contentscript // switch to latest tab?
+      chrome.windows.getAll(null, function(windows) {
+        windows.forEach(function(window) {
+          chrome.tabs.getAllInWindow(window.id, function(tabs) {
+            tabs.forEach(function(tab) {
+              chrome.tabs.sendMessage(tab.id, {
+                action: 'selection',
+                activate: true,
+                mode: 'container'
+              }, function() {
 
-      //         });
-      //       });
-      //     });
-      //   });
-      // });
+              });
+            });
+          });
+        });
+      });
     },
     onMessageReceived: function (data) {
       console.log(JSON.stringify(data));
@@ -45,6 +45,7 @@ export default Ember.Controller.extend({
           enclosing : request.enclosing
         };
         this.containers.push(container);
+        console.log(this.container);
       }
     }
   }
