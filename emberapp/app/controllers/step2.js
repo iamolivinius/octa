@@ -45,7 +45,6 @@ export default Ember.Controller.extend({
           enclosing : request.enclosing
         };
         this.containers.push(container);
-        console.log(this.container);
       }
     }
   }
