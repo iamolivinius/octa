@@ -4,9 +4,9 @@ export default Ember.Controller.extend({
 
   init: function() {
     chrome.runtime.onMessage.addListener(function(request) {
-      console.log('processing message in ember');
-      console.log(request);
-      this.send('onSelectionReceived', request);
+      if (request.type === "container") {
+        this.send('onSelectionReceived', request);
+      }
     }.bind(this));
     this.send('onSelectionReceived', {container: '<div></div>', enclosing: '<span></span>', action: 'add'});
     this.send('onSelectionReceived', {container: '<div><div><div></div></div></div>', enclosing: '<p></p>', action: 'add'});
@@ -34,9 +34,6 @@ export default Ember.Controller.extend({
         });
       });
     },
-    onMessageReceived: function (data) {
-      console.log(JSON.stringify(data));
-    },
     onSelectionReceived: function(request) {
       if (request.action === 'add') {
         var container = {
@@ -44,7 +41,7 @@ export default Ember.Controller.extend({
           pattern :   request.container,
           enclosing : request.enclosing
         };
-        this.containers.push(container);
+        this.containers.pushObject(container);
       }
     }
   }
