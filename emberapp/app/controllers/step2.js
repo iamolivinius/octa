@@ -8,8 +8,6 @@ export default Ember.Controller.extend({
         this.send('onSelectionReceived', request);
       }
     }.bind(this));
-    this.send('onSelectionReceived', {container: '<div></div>', enclosing: '<span></span>', action: 'add'});
-    this.send('onSelectionReceived', {container: '<div><div><div></div></div></div>', enclosing: '<p></p>', action: 'add'});
   },
 
   containers: [],
@@ -26,13 +24,14 @@ export default Ember.Controller.extend({
                 action: 'selection',
                 activate: true,
                 mode: 'container'
-              }, function() {
-
               });
             });
           });
         });
       });
+    },
+    onRemoveContainer: function(container) {
+      this.containers.removeObject(container);
     },
     onSelectionReceived: function(request) {
       if (request.action === 'add') {

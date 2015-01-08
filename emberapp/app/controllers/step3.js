@@ -14,9 +14,6 @@ export default Ember.Controller.extend({
         this.send('onFieldReceived', request);
       }
     }.bind(this));
-    this.send('onTriggerReceived', {cid: 0, trigger: '<div></div>', action: 'add'});
-    this.send('onFieldReceived', {cid: 0, field: '<div>1</div>', action: 'add'});
-    this.send('onFieldReceived', {cid: 0, field: '<div>2</div>', action: 'add'});
   },
 
   callSelector: function(mode, container) {
