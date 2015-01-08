@@ -8,11 +8,11 @@
   </div>
 </h2>
 
-{{#each containers}}
+{{#each con in containers}}
 <div class="ui segment">
   <div class="row">
     <div class="column">
-      <h3 class="ui header">Container: <strong>{{this.name}}</strong></h3>
+      <h3 class="ui header">Container: <strong>{{con.name}}</strong></h3>
       <br>
     </div>
   </div>
@@ -20,7 +20,7 @@
   <div class="ui form">
     <div class="field">
       <label>Process function</label>
-      {{textarea value=this.process}}
+      {{textarea value=con.process}}
     </div>
   </div>
 </div>

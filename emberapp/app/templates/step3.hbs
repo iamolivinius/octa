@@ -25,14 +25,14 @@
     <div class="column">
       <div class="ui red ribbon label">Trigger</div>
       <p>
-        <label id="ctn-KEY-trigger">
+        <label>
           {{#if con.trigger}}
             {{con.trigger}}
           {{else}}
             Not set
           {{/if}}
         </label>
-        <div class="ui tiny button btn-trigger-select" {{action "onSelectTrigger" con.cid}} >
+        <div class="ui tiny button" {{action "onSelectTrigger" con.cid}} >
           Select Trigger
         </div>
       </p>
@@ -42,7 +42,7 @@
   <div class="row">
     <div class="column">
       <div class="ui teal ribbon label">Fields</div>
-      <table class="ui table segment fields-table ctn-KEY">
+      <table class="ui table segment fields-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -54,11 +54,11 @@
 
         {{#each field in con.fields}}
           <tr>
-            <td class="field-name">{{input type="text" value=field.name}}</td>
+            <td>{{input type="text" value=field.name}}</td>
             <td>{{field.field}}</td>
             <td>
-              <div class="ui red icon button btn-remove-field" {{action "onRemoveField" field }}>
-                <i class="remove icon"></i> 
+              <div class="ui red icon button" {{action "onRemoveField" field }}>
+                <i class="remove icon"></i>
               </div>
             </td>
           </tr>
@@ -69,10 +69,10 @@
         <tfoot>
           <tr>
             <th colspan="3">
-              <div class="ui blue labeled icon button btn-add-field" {{action "onSelectField" con.cid}}>
+              <div class="ui blue labeled icon button" {{action "onSelectField" con.cid}}>
                 <i class="add icon"></i> Add Field
               </div>
-              <div class="ui labeled icon button btn-test-container">
+              <div class="ui labeled icon button">
                 <i class="lab icon"></i> Test Container
               </div>
             </th>

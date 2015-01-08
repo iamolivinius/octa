@@ -8,7 +8,7 @@
   </div>
 </h2>
 
-<table class="ui table" id="container-table">
+<table class="ui table">
   <thead>
     <tr>
       <th width="20%">Name</th>
@@ -20,18 +20,18 @@
   <tbody>
     {{#each con in containers}}
     <tr>
-      <td class="tbl-container-name">{{input type="text" value=con.name}}</td>
+      <td>{{input type="text" value=con.name}}</td>
       <td>{{con.enclosing}}</td>
       <td>{{con.pattern}}</td>
       <td>
-        <div class="ui red icon button" id="btn-remove-container" {{action "onRemoveContainer" con }}><i class="remove icon"></i></div></td>
+        <div class="ui red icon button" {{action "onRemoveContainer" con }}><i class="remove icon"></i></div></td>
     </tr>
     {{/each}}
   </tbody>
   <tfoot>
     <tr>
       <th colspan="4">
-        <div class="ui blue labeled icon button" id="btn-select-container" {{action "onSelectContainer"}}><i class="add icon"></i> Select Container</div>
+        <div class="ui blue labeled icon button" {{action "onSelectContainer"}}><i class="add icon"></i> Select Container</div>
       </th>
     </tr>
   </tfoot>
