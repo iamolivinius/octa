@@ -8,29 +8,31 @@
   </div>
 </h2>
 
-{{#each containers}}
+{{#each con in containers}}
 <div class="ui segment">
   <div class="row">
     <div class="column">
       <h3 class="ui header">
-        Container: <strong>{{this.name}}</strong>
+        Container: <strong>{{con.name}}</strong>
       </h3>
       <br>
     </div>
   </div>
+
+
 
   <div class="row">
     <div class="column">
       <div class="ui red ribbon label">Trigger</div>
       <p>
         <label id="ctn-KEY-trigger">
-          {{#if this.trigger}}
-            {{this.trigger}}
+          {{#if con.trigger}}
+            {{con.trigger}}
           {{else}}
             Not set
           {{/if}}
         </label>
-        <div class="ui tiny button btn-trigger-select" data-container="KEY">
+        <div class="ui tiny button btn-trigger-select" {{action "onSelectTrigger" con.cid}} >
           Select Trigger
         </div>
       </p>
@@ -45,25 +47,32 @@
           <tr>
             <th>Name</th>
             <th>Pattern</th>
+            <th>Remove</th>
           </tr>
         </thead>
         <tbody>
-        {{#each this.fields}}
+
+        {{#each field in con.fields}}
           <tr>
-            <td class="field-name" data-container="KEY">{{input type="text" value=this.name}}</td>
-            <td>{{field}}</td></tr>
+            <td class="field-name">{{input type="text" value=field.name}}</td>
+            <td>{{field.field}}</td>
+            <td>
+              <div class="ui red icon button btn-remove-field" {{action "onRemoveField" field }}>
+                <i class="remove icon"></i> 
+              </div>
+            </td>
+          </tr>
         {{/each}}
+
+
         </tbody>
         <tfoot>
           <tr>
-            <th colspan="2">
-              <div class="ui blue labeled icon button btn-add-field" data-container="KEY">
-                <i class="add icon"></i> Add
+            <th colspan="3">
+              <div class="ui blue labeled icon button btn-add-field" {{action "onSelectField" con.cid}}>
+                <i class="add icon"></i> Add Field
               </div>
-              <div class="ui red disabled labeled icon button btn-remove-field" data-container="KEY">
-                <i class="remove icon"></i> Remove
-              </div>
-              <div class="ui labeled icon button btn-test-container" data-container="KEY">
+              <div class="ui labeled icon button btn-test-container">
                 <i class="lab icon"></i> Test Container
               </div>
             </th>
@@ -72,6 +81,7 @@
       </table>
     </div>
   </div>
+
 </div>
 {{else}}
 <div class="ui warning message">

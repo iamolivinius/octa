@@ -167,7 +167,8 @@ var process = function process(event) {
       chrome.runtime.sendMessage({
         action: 'add',
         type: 'field',
-        field: path
+        field: path,
+        cid: event.data.cid
       });
       break;
     case 'trigger':
@@ -195,7 +196,8 @@ var process = function process(event) {
       chrome.runtime.sendMessage({
         action: 'add',
         type: 'trigger',
-        trigger: _trigger
+        trigger: _trigger,
+        cid: event.data.cid
       });
       break;
   }
@@ -217,7 +219,8 @@ chrome.runtime.onMessage.addListener(function(request) {
         // bind 'click' event handler with timeout
         setTimeout(function() {
           $(document).on('click', {
-            mode: request.mode
+            mode : request.mode,
+            cid  : request.cid
           }, process);
         }, 300);
       } else {
