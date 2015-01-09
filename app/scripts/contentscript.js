@@ -61,6 +61,8 @@ var deactivate = function deactivate() {
   $(document).unbind('click', process);
 };
 
+var port = chrome.runtime.connect({name: 'octa-handshake'});
+
 var select = function select(event) {
   /*
    * Method taken from Connor on stackoverflow.com
@@ -151,8 +153,8 @@ var process = function process(event) {
       // add tag name to enclosing
       enclosing += ' ' + $target.prop('tagName').toLowerCase();
 
-      // send request to creator page
-      chrome.runtime.sendMessage({
+      // send message to creator page
+      port.postMessage({
         action: 'add',
         type: 'container',
         container: xml,
@@ -163,8 +165,8 @@ var process = function process(event) {
       // convert target node to selector path
       var path = convertNodeToPath($target);
 
-      // send request to creator page
-      chrome.runtime.sendMessage({
+      // send message to creator page
+      port.postMessage({
         action: 'add',
         type: 'field',
         field: path,
@@ -192,8 +194,8 @@ var process = function process(event) {
         _trigger = '.' + classNames.split(' ').join('.');
       }
 
-      // send request to creator page
-      chrome.runtime.sendMessage({
+      // send message to creator page
+      port.postMessage({
         action: 'add',
         type: 'trigger',
         trigger: _trigger,
@@ -203,7 +205,7 @@ var process = function process(event) {
   }
 };
 
-chrome.runtime.onMessage.addListener(function(request) {
+port.onMessage.addListener(function(request) {
   console.log('received message');
 
   switch (request.action) {

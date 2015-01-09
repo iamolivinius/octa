@@ -2,11 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  needs: 'step2',
+  needs: ['application', 'step2'],
+  port: Ember.computed.alias('controllers.application.port'),
   containers: Ember.computed.alias('controllers.step2.containers'),
 
   init: function() {
-    chrome.runtime.onMessage.addListener(function(request) {
+    this.get('port').onMessage.addListener(function(request) {
       if (request.type === "trigger") {
         this.send('onTriggerReceived', request);
       }
@@ -18,19 +19,11 @@ export default Ember.Controller.extend({
 
   callSelector: function(mode, container) {
     //Run the Contentscript // switch to latest tab?
-    chrome.windows.getAll(null, function(windows) {
-      windows.forEach(function(window) {
-        chrome.tabs.getAllInWindow(window.id, function(tabs) {
-          tabs.forEach(function(tab) {
-            chrome.tabs.sendMessage(tab.id, {
-              action: 'selection',
-              activate: true,
-              mode: mode,
-              cid: container
-            });
-          });
-        });
-      });
+    this.get('port').postMessage({
+      action: 'selection',
+      activate: true,
+      mode: mode,
+      cid: container
     });
   },
 

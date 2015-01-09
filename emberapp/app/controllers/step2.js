@@ -1,33 +1,26 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  needs: 'application',
+  port: Ember.computed.alias('controllers.application.port'),
+  containers: [],
 
   init: function() {
-    chrome.runtime.onMessage.addListener(function(request) {
+    this.get('port').onMessage.addListener(function(request) {
       if (request.type === "container") {
         this.send('onSelectionReceived', request);
       }
     }.bind(this));
   },
 
-  containers: [],
-
   actions: {
     onSelectContainer: function() {
       console.log('Select Container Action starts!');
       //Run the Contentscript // switch to latest tab?
-      chrome.windows.getAll(null, function(windows) {
-        windows.forEach(function(window) {
-          chrome.tabs.getAllInWindow(window.id, function(tabs) {
-            tabs.forEach(function(tab) {
-              chrome.tabs.sendMessage(tab.id, {
-                action: 'selection',
-                activate: true,
-                mode: 'container'
-              });
-            });
-          });
-        });
+      this.get('port').postMessage({
+        action: 'selection',
+        activate: true,
+        mode: 'container'
       });
     },
     onRemoveContainer: function(container) {
