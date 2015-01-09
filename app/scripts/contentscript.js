@@ -230,4 +230,4 @@ chrome.runtime.onMessage.addListener(function(request) {
   }
 });
 
-console.log('content script ready');
+console.log('ObserverCreationTool: Content script ready.');
