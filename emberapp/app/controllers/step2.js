@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   needs: 'application',
   port: Ember.computed.alias('controllers.application.port'),
+  tabId: Ember.computed.alias('controllers.application.tabId'),
   containers: [],
 
   init: function() {
@@ -22,6 +23,7 @@ export default Ember.Controller.extend({
         activate: true,
         mode: 'container'
       });
+      chrome.tabs.update(this.get('tabId'), {highlighted: true});
     },
     onRemoveContainer: function(container) {
       this.containers.removeObject(container);

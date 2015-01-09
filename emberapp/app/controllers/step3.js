@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
 
   needs: ['application', 'step2'],
   port: Ember.computed.alias('controllers.application.port'),
+  tabId: Ember.computed.alias('controllers.application.tabId'),
   containers: Ember.computed.alias('controllers.step2.containers'),
 
   init: function() {
@@ -25,6 +26,7 @@ export default Ember.Controller.extend({
       mode: mode,
       cid: container
     });
+    chrome.tabs.update(this.get('tabId'), {highlighted: true});
   },
 
   actions: {
