@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   activeStep: 1,
   port: {},
   tabId: null,
+  contentTab: null,
 
   init: function () {
     chrome.runtime.onConnect.addListener(function(port) {
@@ -11,10 +12,10 @@ export default Ember.Controller.extend({
       console.log('incomig message via connect');
       this.set('port', port);
       chrome.tabs.getCurrent(function(tab) {
+        this.set('tabId', tab.id);
         chrome.tabs.query({currentWindow: true, index: (tab.index-1)}, function(tabs){
           if (tabs.length === 1){
-            this.set('tabId', tabs[0].id);
-            console.log(tabs);
+            this.set('contentTab', tabs[0].id);
           }
         }.bind(this));
       }.bind(this));

@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   needs: 'application',
   port: Ember.computed.alias('controllers.application.port'),
   tabId: Ember.computed.alias('controllers.application.tabId'),
+  contentTab: Ember.computed.alias('controllers.application.contentTab'),
   containers: [],
 
   init: function() {
@@ -23,13 +24,14 @@ export default Ember.Controller.extend({
         activate: true,
         mode: 'container'
       });
-      chrome.tabs.update(this.get('tabId'), {highlighted: true});
+      chrome.tabs.update(this.get('contentTab'), {active: true});
     },
     onRemoveContainer: function(container) {
       this.containers.removeObject(container);
     },
     onSelectionReceived: function(request) {
       if (request.action === 'add') {
+        chrome.tabs.update(this.get('tabId'), {active: true});
         var container = {
           cid :       this.containers.length,
           pattern :   request.container,
