@@ -20,11 +20,15 @@
   <tbody>
     {{#each con in containers}}
     <tr>
-      <td>{{input type="text" value=con.name}}</td>
+      <td>
+        <div class="ui input">
+          {{input type="text" value=con.name}}
+        </div>
+      </td>
       <td>{{con.enclosing}}</td>
       <td>{{con.pattern}}</td>
       <td>
-        <div class="ui red icon button" {{action "onRemoveContainer" con }}><i class="remove icon"></i></div></td>
+        <div class="ui red icon button" {{action "onRemoveContainer" con }}><i class="trash icon"></i></div></td>
     </tr>
     {{/each}}
   </tbody>
