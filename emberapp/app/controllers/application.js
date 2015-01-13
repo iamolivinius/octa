@@ -7,17 +7,14 @@ export default Ember.Controller.extend({
   contentTab: null,
 
   init: function () {
-    chrome.runtime.onConnect.addListener(function(port) {
-      console.assert(port.name === 'octa-handshake');
-      console.log('incomig message via connect');
-      this.set('port', port);
-      chrome.tabs.getCurrent(function(tab) {
-        this.set('tabId', tab.id);
-        chrome.tabs.query({currentWindow: true, index: (tab.index-1)}, function(tabs){
-          if (tabs.length === 1){
-            this.set('contentTab', tabs[0].id);
-          }
-        }.bind(this));
+    chrome.tabs.getCurrent(function(tab) {
+      this.set('tabId', tab.id);
+      chrome.tabs.query({currentWindow: true, index: (tab.index-1)}, function(tabs){
+        if (tabs.length === 1){
+          this.set('contentTab', tabs[0].id);
+          var connection = chrome.tabs.connect(tabs[0].id, {name: 'octa-handshake'});
+          this.set('port', connection);
+        }
       }.bind(this));
     }.bind(this));
   },

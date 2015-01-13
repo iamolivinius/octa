@@ -61,7 +61,7 @@ var deactivate = function deactivate() {
   $(document).unbind('click', process);
 };
 
-var port = chrome.runtime.connect({name: 'octa-handshake'});
+var port;
 
 var select = function select(event) {
   /*
@@ -205,31 +205,37 @@ var process = function process(event) {
   }
 };
 
-port.onMessage.addListener(function(request) {
-  console.log('received message');
+chrome.runtime.onConnect.addListener(function(connection) {
+  console.assert(connection.name === 'octa-handshake');
+  console.log('Incomig Connection');
+  port = connection;
 
-  switch (request.action) {
-    case 'selection':
+  port.onMessage.addListener(function(request) {
+    console.log('Received Message');
 
-      if (request.activate === true) {
-        // inject selector frame
-        $('body').append(selector);
+    switch (request.action) {
+      case 'selection':
 
-        // bind 'mousemove' event handler
-        $(document).mousemove(select);
+        if (request.activate === true) {
+          // inject selector frame
+          $('body').append(selector);
 
-        // bind 'click' event handler with timeout
-        setTimeout(function() {
-          $(document).on('click', {
-            mode : request.mode,
-            cid  : request.cid
-          }, process);
-        }, 300);
-      } else {
-        deactivate();
-      }
-      break;
-  }
+          // bind 'mousemove' event handler
+          $(document).mousemove(select);
+
+          // bind 'click' event handler with timeout
+          setTimeout(function() {
+            $(document).on('click', {
+              mode : request.mode,
+              cid  : request.cid
+            }, process);
+          }, 300);
+        } else {
+          deactivate();
+        }
+        break;
+    }
+  });
 });
 
 console.log('ObserverCreationTool: Content script ready.');
