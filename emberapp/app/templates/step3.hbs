@@ -17,16 +17,16 @@
   <div class="ui vertical segment">
     <div class="ui red ribbon label">Trigger</div>
     <p>
-      <label>
-        {{#if con.trigger}}
-          {{con.trigger}}
-        {{else}}
-          Not set
-        {{/if}}
-      </label>
+      {{#if con.trigger}}
+      <label>Triggerpattern: {{con.trigger}}</label>
+      <div class="ui red tiny button" {{action "onSelectTrigger" con.cid}} >
+        Remove and Select New Trigger
+      </div>
+      {{else}}
       <div class="ui tiny button" {{action "onSelectTrigger" con.cid}} >
         Select Trigger
       </div>
+      {{/if}}
     </p>
   </div>
 
