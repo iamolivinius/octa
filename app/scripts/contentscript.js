@@ -57,8 +57,8 @@ var deactivate = function deactivate() {
   // unbind 'mousemove' event handler
   $(document).unbind('mousemove');
 
-  // unbind 'click' event handler
-  $(document).unbind('click', process);
+  // unbind 'mousedown' event handler
+  $(document).unbind('mousedown', process);
 };
 
 var port;
@@ -117,6 +117,10 @@ var select = function select(event) {
 };
 
 var process = function process(event) {
+
+  //inject overlay to block interactions
+  $('body').append('<div id="octa-overlay"></div>');
+
   console.log('Processing started: ');
   console.log(event);
   // stop event propagation and default events
@@ -128,6 +132,7 @@ var process = function process(event) {
 
   // wrap event target node
   var $target = $(event.target);
+  var msg;
 
   switch (event.data.mode) {
     case 'container':
@@ -153,25 +158,25 @@ var process = function process(event) {
       // add tag name to enclosing
       enclosing += ' ' + $target.prop('tagName').toLowerCase();
 
-      // send message to creator page
-      port.postMessage({
+      //message to creator page
+      msg = {
         action: 'add',
         type: 'container',
         container: xml,
         enclosing: enclosing
-      });
+      };
       break;
     case 'field':
       // convert target node to selector path
       var path = convertNodeToPath($target);
 
-      // send message to creator page
-      port.postMessage({
+      //message to creator page
+      msg = {
         action: 'add',
         type: 'field',
         field: path,
         cid: event.data.cid
-      });
+      };
       break;
     case 'trigger':
       // get class of target node
@@ -194,15 +199,21 @@ var process = function process(event) {
         _trigger = '.' + classNames.split(' ').join('.');
       }
 
-      // send message to creator page
-      port.postMessage({
+      //message to creator page
+      msg = {
         action: 'add',
         type: 'trigger',
         trigger: _trigger,
         cid: event.data.cid
-      });
+      };
       break;
   }
+  //detach overlay block on mouseup and send msg
+  $(document).mouseup(function(e){
+    $('#octa-overlay').detach();
+    port.postMessage(msg);
+    $(this).unbind(e);
+  });
 };
 
 chrome.runtime.onConnect.addListener(function(connection) {
@@ -225,7 +236,7 @@ chrome.runtime.onConnect.addListener(function(connection) {
 
           // bind 'click' event handler with timeout
           setTimeout(function() {
-            $(document).on('click', {
+            $(document).mousedown({
               mode : request.mode,
               cid  : request.cid
             }, process);
