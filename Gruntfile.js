@@ -240,7 +240,8 @@ module.exports = function (grunt) {
             'styles/{,*/}*.css',
             'styles/fonts/{,*/}*.*',
             '_locales/{,*/}*.json',
-            'ui/**/*'
+            'ui/**/*',
+            'scripts/contentscript.js'
           ]
         }]
       }
@@ -323,7 +324,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'jshint',
-    'test',
+    // 'test',
     'build'
   ]);
 };

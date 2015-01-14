@@ -2,7 +2,7 @@
   "name": "pattern-creator",
   "version": "0.0.0",
   "dependencies": {
-    "semantic-ui": "~1.2.0"
+    "jquery": "~2.1.3"
   },
   "devDependencies": {}
 }
