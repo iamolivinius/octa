@@ -21,11 +21,11 @@ var app = new EmberApp();
 app.import('bower_components/semantic-ui/dist/semantic.css');
 app.import('bower_components/semantic-ui/dist/semantic.js');
 
-var semanticuiAssets = pickFiles('bower_components/semantic-ui/dist/themes', {
-  destDir: '/assets/themes',
-  files: ['**/*.woff', '**/*.ttf'],
+var semanticFontFiles = pickFiles(app.bowerDirectory + '/semantic-ui/dist/themes', {
   srcDir: '/',
+  files: ['**/*.ttf', '**/*.woff'],
+  destDir: '/assets/themes'
 });
 
-module.exports = app.toTree(semanticuiAssets);
+module.exports = app.toTree(semanticFontFiles);
 
