@@ -117,6 +117,17 @@ var select = function select(event) {
 };
 
 var process = function process(event) {
+  //check for alt key to pass through clicks
+  if (event.shiftKey) {
+    // rebind 'click' event handler with timeout so it's called first
+    setTimeout(function() {
+      $(document).mousedown({
+        mode : event.data.mode,
+        cid  : event.data.cid
+      }, process);
+    }, 300);
+    return;
+  }
 
   //inject overlay to block interactions
   $('body').append('<div id="octa-overlay"></div>');
