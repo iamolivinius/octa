@@ -1,1 +1,0 @@
-"use strict";chrome.runtime.onInstalled.addListener(function(a){console.log("previousVersion",a.previousVersion)}),chrome.browserAction.onClicked.addListener(function(){chrome.tabs.create({url:chrome.extension.getURL("ui/index.html")})});
