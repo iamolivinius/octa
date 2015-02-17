@@ -29,6 +29,55 @@ define("pattern-creator/app",
 
     __exports__["default"] = App;
   });
+define("pattern-creator/components/ui-accordion", 
+  ["semantic-ui-ember/components/ui-accordion","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Accordion = __dependency1__["default"];
+    __exports__["default"] = Accordion;
+  });
+define("pattern-creator/components/ui-checkbox", 
+  ["semantic-ui-ember/components/ui-checkbox","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Checkbox = __dependency1__["default"];
+    __exports__["default"] = Checkbox;
+  });
+define("pattern-creator/components/ui-dropdown", 
+  ["semantic-ui-ember/components/ui-dropdown","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Dropdown = __dependency1__["default"];
+    __exports__["default"] = Dropdown;
+  });
+define("pattern-creator/components/ui-popup", 
+  ["semantic-ui-ember/components/ui-popup","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Popup = __dependency1__["default"];
+    __exports__["default"] = Popup;
+  });
+define("pattern-creator/components/ui-progress", 
+  ["semantic-ui-ember/components/ui-progress","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Progress = __dependency1__["default"];
+    __exports__["default"] = Progress;
+  });
+define("pattern-creator/components/ui-radio", 
+  ["semantic-ui-ember/components/ui-radio","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Radio = __dependency1__["default"];
+    __exports__["default"] = Radio;
+  });
+define("pattern-creator/components/ui-rating", 
+  ["semantic-ui-ember/components/ui-rating","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Rating = __dependency1__["default"];
+    __exports__["default"] = Rating;
+  });
 define("pattern-creator/controllers/application", 
   ["ember","exports"],
   function(__dependency1__, __exports__) {
@@ -483,6 +532,102 @@ define("pattern-creator/templates/application",
       
     });
   });
+define("pattern-creator/templates/components/ui-dropdown", 
+  ["ember","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Ember = __dependency1__["default"];
+    __exports__["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+    this.compilerInfo = [4,'>= 1.0.0'];
+    helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+      var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
+
+    function program1(depth0,data) {
+      
+      var buffer = '';
+      data.buffer.push("\n  <i ");
+      data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+        'class': ("icon :icon")
+      },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
+      data.buffer.push("></i>\n");
+      return buffer;
+      }
+
+    function program3(depth0,data) {
+      
+      
+      data.buffer.push("\n  <i class=\"dropdown icon\"></i>\n");
+      }
+
+    function program5(depth0,data) {
+      
+      var buffer = '', stack1;
+      data.buffer.push("\n    ");
+      stack1 = helpers.each.call(depth0, "group", "in", "view.groupedContent", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+      data.buffer.push("\n  ");
+      return buffer;
+      }
+    function program6(depth0,data) {
+      
+      var buffer = '';
+      data.buffer.push("\n      ");
+      data.buffer.push(escapeExpression(helpers.view.call(depth0, "view.groupView", {hash:{
+        'content': ("content"),
+        'label': ("label")
+      },hashTypes:{'content': "ID",'label': "ID"},hashContexts:{'content': depth0,'label': depth0},contexts:[depth0],types:["ID"],data:data})));
+      data.buffer.push("\n    ");
+      return buffer;
+      }
+
+    function program8(depth0,data) {
+      
+      var buffer = '', stack1;
+      data.buffer.push("\n    ");
+      stack1 = helpers.each.call(depth0, "item", "in", "view.content", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+      data.buffer.push("\n  ");
+      return buffer;
+      }
+    function program9(depth0,data) {
+      
+      var buffer = '';
+      data.buffer.push("\n      ");
+      data.buffer.push(escapeExpression(helpers.view.call(depth0, "view.optionView", {hash:{
+        'content': ("item"),
+        'valuePath': ("view.optionValuePath")
+      },hashTypes:{'content': "ID",'valuePath': "ID"},hashContexts:{'content': depth0,'valuePath': depth0},contexts:[depth0],types:["ID"],data:data})));
+      data.buffer.push("\n    ");
+      return buffer;
+      }
+
+    function program11(depth0,data) {
+      
+      var buffer = '', stack1;
+      data.buffer.push("\n  ");
+      stack1 = helpers._triageMustache.call(depth0, "yield", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+      data.buffer.push("\n");
+      return buffer;
+      }
+
+      data.buffer.push("<div class=\"text\">");
+      stack1 = helpers._triageMustache.call(depth0, "view.prompt", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+      data.buffer.push("</div>\n");
+      stack1 = helpers['if'].call(depth0, "icon", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+      data.buffer.push("\n<div class=\"menu\">\n  ");
+      stack1 = helpers['if'].call(depth0, "view.optionGroupPath", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(8, program8, data),fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+      data.buffer.push("\n</div>\n");
+      stack1 = helpers['if'].call(depth0, "view.template", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],data:data});
+      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+      data.buffer.push("\n");
+      return buffer;
+      
+    });
+  });
 define("pattern-creator/templates/index", 
   ["ember","exports"],
   function(__dependency1__, __exports__) {
@@ -553,19 +698,21 @@ define("pattern-creator/templates/step2",
 
     function program1(depth0,data) {
       
-      var buffer = '', stack1, helper, options;
+      var buffer = '', helper, options;
       data.buffer.push("\n    <tr>\n      <td>\n        <div class=\"ui input\">\n          ");
       data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
         'type': ("text"),
         'value': ("con.name")
       },hashTypes:{'type': "STRING",'value': "ID"},hashContexts:{'type': depth0,'value': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-      data.buffer.push("\n        </div>\n      </td>\n      <td>");
-      stack1 = helpers._triageMustache.call(depth0, "con.enclosing", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-      data.buffer.push("</td>\n      <td>");
-      stack1 = helpers._triageMustache.call(depth0, "con.pattern", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-      if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-      data.buffer.push("</td>\n      <td>\n        <div class=\"ui red icon button\" ");
+      data.buffer.push("\n        </div>\n      </td>\n      <td>\n        <div class=\"ui form\">\n          <div class=\"field\">\n            ");
+      data.buffer.push(escapeExpression((helper = helpers.textarea || (depth0 && depth0.textarea),options={hash:{
+        'value': ("con.enclosing")
+      },hashTypes:{'value': "ID"},hashContexts:{'value': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "textarea", options))));
+      data.buffer.push("\n          </div>\n        </div>\n      </td>\n      <td>\n        <div class=\"ui form\">\n          <div class=\"field\">\n            ");
+      data.buffer.push(escapeExpression((helper = helpers.textarea || (depth0 && depth0.textarea),options={hash:{
+        'value': ("con.pattern")
+      },hashTypes:{'value': "ID"},hashContexts:{'value': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "textarea", options))));
+      data.buffer.push("\n          </div>\n        </div>\n      </td>\n      <td>\n        <div class=\"ui red icon button\" ");
       data.buffer.push(escapeExpression(helpers.action.call(depth0, "onRemoveContainer", "con", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
       data.buffer.push("><i class=\"trash icon\"></i></div></td>\n    </tr>\n    ");
       return buffer;
@@ -641,10 +788,12 @@ define("pattern-creator/templates/step3",
         'type': ("text"),
         'value': ("field.name")
       },hashTypes:{'type': "STRING",'value': "ID"},hashContexts:{'type': depth0,'value': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-      data.buffer.push("\n            </div>\n          </td>\n          <td>");
-      stack1 = helpers._triageMustache.call(depth0, "field.field", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+      data.buffer.push("\n            </div>\n          </td>\n          <td>\n            <div class=\"ui form\">\n              <div class=\"field\">\n                ");
+      stack1 = (helper = helpers.textarea || (depth0 && depth0.textarea),options={hash:{
+        'value': ("field.field")
+      },hashTypes:{'value': "ID"},hashContexts:{'value': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "textarea", options));
       if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-      data.buffer.push("</td>\n          <td>\n            <div class=\"ui red icon button\" ");
+      data.buffer.push("\n              </div>\n            </div>\n          </td>\n          <td>\n            <div class=\"ui red icon button\" ");
       data.buffer.push(escapeExpression(helpers.action.call(depth0, "onRemoveField", "field", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
       data.buffer.push(">\n              <i class=\"trash icon\"></i>\n            </div>\n          </td>\n        </tr>\n      ");
       return buffer;
@@ -1380,6 +1529,13 @@ define("pattern-creator/views/step1",
     //   $('.ui.dropdown')
     //     .dropdown();
     // }.on('didInsertElement')
+  });
+define("pattern-creator/views/ui-modal", 
+  ["semantic-ui-ember/views/ui-modal","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var Modal = __dependency1__["default"];
+    __exports__["default"] = Modal;
   });
 /* jshint ignore:start */
 

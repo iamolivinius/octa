@@ -25,8 +25,20 @@
           {{input type="text" value=con.name}}
         </div>
       </td>
-      <td>{{con.enclosing}}</td>
-      <td>{{con.pattern}}</td>
+      <td>
+        <div class="ui form">
+          <div class="field">
+            {{textarea value=con.enclosing}}
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="ui form">
+          <div class="field">
+            {{textarea value=con.pattern}}
+          </div>
+        </div>
+      </td>
       <td>
         <div class="ui red icon button" {{action "onRemoveContainer" con }}><i class="trash icon"></i></div></td>
     </tr>
